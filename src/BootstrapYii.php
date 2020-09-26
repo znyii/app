@@ -11,13 +11,14 @@ class BootstrapYii
 {
 
     protected static $isInited = false;
+    protected static $application;
 
-    public static function init(string $appName, string $appType = AppTypeEnum::WEB)/*: ?Application*/ {
+    public static function init(string $appName, string $appType = AppTypeEnum::WEB): Application {
 
-        if(self::$isInited) {
-            dd(debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 3));
+        if(self::$application) {
+            return self::$application;
+            //throw new \RuntimeException('Already inited!');
         }
-        self::$isInited = true;
 
         $_ENV['PROJECT_DIR'] = realpath(__DIR__ . '/../../../..');
         $_ENV['APP_DIR'] = $_ENV['PROJECT_DIR'] . '/' . $appName;
@@ -28,11 +29,11 @@ class BootstrapYii
         $mainConfig = $kernel->run();
 
         if($appType == AppTypeEnum::WEB) {
-            $application = new \yii\web\Application($mainConfig);
+            self::$application = new \yii\web\Application($mainConfig);
         } elseif ($appType == AppTypeEnum::CONSOLE) {
-            $application = new \yii\console\Application($mainConfig);
+            self::$application = new \yii\console\Application($mainConfig);
         }
 
-        return $application;
+        return self::$application;
     }
 }
