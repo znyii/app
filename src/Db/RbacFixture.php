@@ -5,8 +5,8 @@ namespace ZnYii\App\Db;
 use Yii;
 use yii\rbac\Item;
 use ZnCore\Base\Exceptions\NotFoundException;
+use ZnCore\Base\Helpers\EnumHelper;
 use ZnCore\Db\Fixture\Libs\FixtureInterface;
-use ZnCore\Domain\Base\BaseEnum;
 use ZnYii\App\BootstrapYii;
 use ZnYii\App\Enums\AppTypeEnum;
 
@@ -49,18 +49,18 @@ abstract class RbacFixture implements FixtureInterface
 
     protected function loadRolesFromEnum(string $enumClassName)
     {
-        /** @var BaseEnum $enumClassName */
-        foreach ($enumClassName::values() as $itemName) {
-            $label = $enumClassName::getLabel($itemName);
+        $itemNames = EnumHelper::getValues($enumClassName);
+        foreach ($itemNames as $itemName) {
+            $label = EnumHelper::getLabel($enumClassName, $itemName);
             $this->addRole($itemName, $label);
         }
     }
 
     protected function loadPermissionsFromEnum(string $enumClassName)
     {
-        /** @var BaseEnum $enumClassName */
-        foreach ($enumClassName::values() as $itemName) {
-            $label = $enumClassName::getLabel($itemName);
+        $itemNames = EnumHelper::getValues($enumClassName);
+        foreach ($itemNames as $itemName) {
+            $label = EnumHelper::getLabel($enumClassName, $itemName);
             $this->addPermission($itemName, $label);
         }
     }
