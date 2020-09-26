@@ -10,7 +10,14 @@ use yii\base\Application;
 class BootstrapYii
 {
 
-    public static function init(string $appName, string $appType = AppTypeEnum::WEB): Application {
+    protected static $isInited = false;
+
+    public static function init(string $appName, string $appType = AppTypeEnum::WEB)/*: ?Application*/ {
+
+        if(self::$isInited) {
+            dd(debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 3));
+        }
+        self::$isInited = true;
 
         $_ENV['PROJECT_DIR'] = realpath(__DIR__ . '/../../../..');
         $_ENV['APP_DIR'] = $_ENV['PROJECT_DIR'] . '/' . $appName;
