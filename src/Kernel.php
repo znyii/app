@@ -26,10 +26,10 @@ class Kernel
         $this->loader = $loader;
     }
 
-    public function setEnv(array $env): void
+    /*public function setEnv(array $env): void
     {
         $this->env = $env;
-    }
+    }*/
 
     public function run(array $env = null)
     {
