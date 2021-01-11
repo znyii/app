@@ -2,10 +2,10 @@
 
 namespace ZnYii\App;
 
+use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 use ZnCore\Base\Enums\Measure\TimeEnum;
 use ZnCore\Base\Legacy\Yii\Helpers\FileHelper;
 use ZnYii\App\Loader\BaseLoader;
-use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 
 class Kernel
 {
@@ -14,17 +14,30 @@ class Kernel
     private $loader;
     private $env;
 
-    public function __construct(array $env, BaseLoader $loader = null)
+    public function __construct(array $env = null, BaseLoader $loader = null)
     {
         $this->loader = $loader;
         $this->env = $env;
         //$this->initCache($env);
     }
 
-    public function run()
+    public function setLoader(BaseLoader $loader): void
     {
-        $this->init($this->env);
-        $appName = $this->env['APP_NAME'];
+        $this->loader = $loader;
+    }
+
+    public function setEnv(array $env): void
+    {
+        $this->env = $env;
+    }
+
+    public function run(array $env = null)
+    {
+        if($env === null) {
+            $env = $this->env;
+        }
+        $this->init($env);
+        $appName = $env['APP_NAME'];
         Constant::defineBase(realpath(__DIR__ . '/../../../..'));
         Constant::defineApp($appName);
         $config = $this->loadMainConfig($appName);
