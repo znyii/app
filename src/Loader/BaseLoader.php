@@ -4,8 +4,9 @@ namespace ZnYii\App\Loader;
 
 use ZnCore\Base\Helpers\LoadHelper;
 use ZnCore\Base\Legacy\Yii\Helpers\FileHelper;
+use ZnCore\Base\Libs\App\Interfaces\LoaderInterface;
 
-abstract class BaseLoader
+abstract class BaseLoader implements LoaderInterface
 {
 
     protected $env;

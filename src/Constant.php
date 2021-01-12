@@ -59,5 +59,4 @@ class Constant
         //defined('CONSOLE_DIR') OR define('CONSOLE_DIR', $rootDir . DIRECTORY_SEPARATOR . CONSOLE);
         defined('VENDOR_DIR') OR define('VENDOR_DIR', $rootDir . DIRECTORY_SEPARATOR . 'vendor');
     }
-
 }
