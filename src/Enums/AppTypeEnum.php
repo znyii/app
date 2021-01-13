@@ -6,6 +6,7 @@ class AppTypeEnum
 {
 
     const WEB = 'web';
+    const API = 'api';
     const CONSOLE = 'console';
 
 }

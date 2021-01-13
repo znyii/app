@@ -2,6 +2,7 @@
 
 namespace ZnYii\App\Loader;
 
+use ZnCore\Base\Helpers\EnvHelper;
 use ZnCore\Base\Helpers\LoadHelper;
 use ZnCore\Base\Legacy\Yii\Helpers\FileHelper;
 use ZnCore\Base\Libs\App\Interfaces\LoaderInterface;
@@ -10,6 +11,7 @@ abstract class BaseLoader implements LoaderInterface
 {
 
     protected $env;
+    protected $appDirectory;
 
     abstract public function bootstrapApp(string $appName);
 
@@ -17,9 +19,11 @@ abstract class BaseLoader implements LoaderInterface
 
     abstract public function paramConfigFiles(string $appName): array;
 
-    public function __construct(array $env)
+    public function __construct(string $appDirectory)
     {
-        $this->env = $env;
+        $this->appDirectory = $appDirectory;
+//        $this->env = $env ?: $_ENV;
+//        dd($this->env);
     }
 
     public function loadMainConfig(string $appName): array
@@ -33,28 +37,28 @@ abstract class BaseLoader implements LoaderInterface
         return $config;
     }
 
-    public function loadYii()
+    /*public function loadYii()
     {
         include __DIR__ . '/../../../../yiisoft/yii2/Yii.php';
-    }
+    }*/
 
     protected function isTestEnv(): bool
     {
-        return $this->env['APP_ENV'] == 'test';
+        return EnvHelper::isTest();
     }
 
     private function prepareConfig(string $appName, array $config): array
     {
         $config['vendorPath'] = $config['vendorPath'] ?? FileHelper::path('vendor');
         $config['id'] = $config['id'] ?? $this->generateAppId($appName);
-        $config['basePath'] = $config['basePath'] ?? $this->env['APP_DIR'];
+        $config['basePath'] = $config['basePath'] ?? $this->appDirectory;
         //$config['controllerNamespace'] = $config['controllerNamespace'] ?? $_ENV['PROJECT_DIR'] . '\controllers';
         return $config;
     }
 
     private function generateAppId(string $appName): string
     {
-        $appId = 'app-' . $appName . '-' . $this->env['APP_ENV'];
+        $appId = 'app-' . $appName /*. '-' . $this->env['APP_ENV']*/;
         return $appId;
     }
 
