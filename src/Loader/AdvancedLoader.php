@@ -2,6 +2,8 @@
 
 namespace ZnYii\App\Loader;
 
+use ZnCore\Base\Libs\Container\ContainerAttributeTrait;
+
 class AdvancedLoader extends BaseLoader
 {
 

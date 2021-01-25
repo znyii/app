@@ -6,9 +6,12 @@ use ZnCore\Base\Helpers\EnvHelper;
 use ZnCore\Base\Helpers\LoadHelper;
 use ZnCore\Base\Legacy\Yii\Helpers\FileHelper;
 use ZnCore\Base\Libs\App\Interfaces\LoaderInterface;
+use ZnCore\Base\Libs\Container\ContainerAttributeTrait;
 
 abstract class BaseLoader implements LoaderInterface
 {
+
+    use ContainerAttributeTrait;
 
     protected $env;
     protected $appDirectory;
