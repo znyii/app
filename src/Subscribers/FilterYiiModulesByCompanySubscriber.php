@@ -11,7 +11,14 @@ use ZnCore\Domain\Traits\EntityManagerTrait;
 class FilterYiiModulesByCompanySubscriber implements EventSubscriberInterface
 {
 
+    public $companyId;
+
     use EntityManagerTrait;
+
+    public function __construct(int $companyId = null)
+    {
+        $this->companyId = $companyId ?? $_ENV['COMPANY_ID'];
+    }
 
     public static function getSubscribedEvents()
     {
@@ -23,16 +30,9 @@ class FilterYiiModulesByCompanySubscriber implements EventSubscriberInterface
     public function onAfterLoadConfig(LoadConfigEvent $event)
     {
         $config = $event->getConfig();
-        $config = $this->filterModuleConfig($config);
-        $event->setConfig($config);
-    }
-
-    protected function filterModuleConfig(array $config): array
-    {
-        $companyId = $_ENV['COMPANY_ID'] ?? 1;
-        $modulesByCompanyId = $config['params']['modulesByCompanyId']['common'];
-        $modulesByCompanyId = ArrayHelper::merge($modulesByCompanyId, $config['params']['modulesByCompanyId'][$companyId]);
+        $modulesConfig = $config['params']['modulesByCompanyId'];
+        $modulesByCompanyId = ArrayHelper::merge($modulesConfig['common'], $modulesConfig[$this->companyId]);
         $config['modules'] = ArrayHelper::extractByKeys($config['modules'], $modulesByCompanyId);
-        return $config;
+        $event->setConfig($config);
     }
 }
