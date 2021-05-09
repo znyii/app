@@ -8,7 +8,7 @@ use ZnCore\Base\Libs\App\Enums\KernelEventEnum;
 use ZnCore\Base\Libs\App\Events\LoadConfigEvent;
 use ZnCore\Domain\Traits\EntityManagerTrait;
 
-class FilterModulesByCompanySubscriber implements EventSubscriberInterface
+class FilterYiiModulesByCompanySubscriber implements EventSubscriberInterface
 {
 
     use EntityManagerTrait;

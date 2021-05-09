@@ -6,7 +6,7 @@ use ZnCore\Base\Libs\App\Enums\KernelEventEnum;
 use ZnCore\Base\Libs\App\Events\ConstructKernelEvent;
 use ZnCore\Base\Libs\App\Subscribers\ConfigureContainerSubscriber;
 use ZnCore\Base\Libs\App\Subscribers\ConfigureEntityManagerSubscriber;
-use ZnYii\App\Subscribers\FilterModulesByCompanySubscriber;
+use ZnYii\App\Subscribers\FilterYiiModulesByCompanySubscriber;
 use ZnYii\App\Subscribers\PrepareYiiSubscriber;
 
 class Kernel extends \ZnCore\Base\Libs\App\Kernel
@@ -24,7 +24,7 @@ class Kernel extends \ZnCore\Base\Libs\App\Kernel
     {
         return [
             PrepareYiiSubscriber::class,
-            FilterModulesByCompanySubscriber::class,
+            FilterYiiModulesByCompanySubscriber::class,
             ConfigureContainerSubscriber::class,
             ConfigureEntityManagerSubscriber::class,
         ];
