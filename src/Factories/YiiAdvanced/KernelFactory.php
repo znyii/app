@@ -29,7 +29,7 @@ class KernelFactory extends \ZnCore\Base\Libs\App\Factories\KernelFactory
     {
         self::init();
         $bundleLoader = new BundleLoader([], $import);
-        self::loadBundles($bundleLoader, $appName);
+        static::loadBundles($bundleLoader, $appName);
         $kernel = new \ZnYii\App\Kernel($appName);
         $kernel->setLoader(new AdvancedLoader(__DIR__ . '/../../../../../../' . $appName));
         $kernel->setLoader($bundleLoader);
