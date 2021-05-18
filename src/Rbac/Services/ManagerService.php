@@ -3,9 +3,9 @@
 namespace ZnYii\App\Rbac\Services;
 
 use ZnBundle\Rbac\Domain\Enums\RbacRoleEnum;
-use ZnBundle\Rbac\Domain\Interfaces\CheckAccessInterface;
 use ZnBundle\User\Domain\Interfaces\Services\AuthServiceInterface;
 use ZnCore\Domain\Helpers\EntityHelper;
+use ZnSandbox\Sandbox\Casbin\Domain\Interfaces\CheckAccessInterface;
 use ZnSandbox\Sandbox\Casbin\Domain\Interfaces\Repositories\AssignmentRepositoryInterface;
 use ZnSandbox\Sandbox\Casbin\Domain\Interfaces\Services\ManagerServiceInterface;
 
