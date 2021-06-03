@@ -35,8 +35,12 @@ class ManagerService implements CheckAccessInterface
         if ($permissionName == RbacRoleEnum::AUTHORIZED && !empty($userId)) {
             return true;
         }
-        $assignmentCollection = $this->assignmentRepository->allByIdentityId($userId);
-        $roles = EntityHelper::getColumn($assignmentCollection, 'itemName');
+        if($userId) {
+            $assignmentCollection = $this->assignmentRepository->allByIdentityId($userId);
+            $roles = EntityHelper::getColumn($assignmentCollection, 'itemName');
+        } else {
+            $roles = $this->casbinService->getDefaultRoles();
+        }
         return $this->casbinService->isCanByRoleNames($roles, [$permissionName]);
     }
 }
