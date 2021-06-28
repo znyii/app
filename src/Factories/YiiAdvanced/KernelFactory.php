@@ -10,9 +10,9 @@ use ZnYii\App\Loader\AdvancedLoader;
 class KernelFactory extends \ZnCore\Base\Libs\App\Factories\KernelFactory
 {
 
-    public static function createConsoleKernel(array $bundles = []): Kernel
+    public static function createConsoleKernel(array $bundles = [], $import = ['i18next', 'container', 'console', 'migration']): Kernel
     {
-        return self::createKernel('console', ['i18next', 'container', 'console', 'migration']);
+        return self::createKernel('console', $import);
     }
 
     public static function createFrontendKernel(array $bundles = []): Kernel
