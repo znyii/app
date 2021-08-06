@@ -5,27 +5,28 @@ namespace ZnYii\App\Factories\YiiAdvanced;
 use ZnCore\Base\Libs\App\Interfaces\LoaderInterface;
 use ZnCore\Base\Libs\App\Kernel;
 use ZnCore\Base\Libs\App\Loaders\BundleLoader;
+use ZnCore\Contract\Kernel\Interfaces\KernelInterface;
 use ZnYii\App\Loader\AdvancedLoader;
 
 class KernelFactory extends \ZnCore\Base\Libs\App\Factories\KernelFactory
 {
 
-    public static function createConsoleKernel(array $bundles = [], $import = ['i18next', 'container', 'console', 'migration']): Kernel
+    public static function createConsoleKernel(array $bundles = [], $import = ['i18next', 'container', 'console', 'migration']): KernelInterface
     {
         return self::createKernel('console', $import);
     }
 
-    public static function createFrontendKernel(array $bundles = []): Kernel
+    public static function createFrontendKernel(array $bundles = []): KernelInterface
     {
         return self::createKernel('frontend', ['i18next', 'container', 'yiiWeb']);
     }
 
-    public static function createBackendKernel(): Kernel
+    public static function createBackendKernel(): KernelInterface
     {
         return self::createKernel('backend', ['i18next', 'container', 'yiiAdmin']);
     }
 
-    protected static function createKernel(string $appName, array $import): Kernel
+    protected static function createKernel(string $appName, array $import): KernelInterface
     {
         self::init();
         $bundleLoader = new BundleLoader([], $import);
