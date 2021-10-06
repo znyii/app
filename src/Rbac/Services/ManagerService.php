@@ -6,23 +6,23 @@ use ZnBundle\User\Domain\Interfaces\Services\AuthServiceInterface;
 use ZnCore\Domain\Helpers\EntityHelper;
 use ZnUser\Rbac\Domain\Enums\RbacRoleEnum;
 use ZnUser\Rbac\Domain\Interfaces\CheckAccessInterface;
-use ZnUser\Rbac\Domain\Interfaces\Repositories\AssignmentRepositoryInterface;
+use ZnUser\Rbac\Domain\Interfaces\Services\AssignmentServiceInterface;
 use ZnUser\Rbac\Domain\Interfaces\Services\ManagerServiceInterface;
 
 class ManagerService implements CheckAccessInterface
 {
 
-    private $assignmentRepository;
     private $authService;
     private $casbinService;
+    private $assignmentService;
 
     public function __construct(
-        AssignmentRepositoryInterface $assignmentRepository,
+        AssignmentServiceInterface $assignmentService,
         ManagerServiceInterface $casbinService,
         AuthServiceInterface $authService
     )
     {
-        $this->assignmentRepository = $assignmentRepository;
+        $this->assignmentService = $assignmentService;
         $this->authService = $authService;
         $this->casbinService = $casbinService;
     }
@@ -36,8 +36,7 @@ class ManagerService implements CheckAccessInterface
             return true;
         }
         if($userId) {
-            $assignmentCollection = $this->assignmentRepository->allByIdentityId($userId);
-            $roles = EntityHelper::getColumn($assignmentCollection, 'itemName');
+            $roles = $this->assignmentService->getRolesByIdentityId($userId);
         } else {
             $roles = $this->casbinService->getDefaultRoles();
         }
