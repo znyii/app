@@ -6,7 +6,7 @@ use ZnCore\Base\Helpers\EnvHelper;
 use ZnCore\Base\Helpers\LoadHelper;
 use ZnCore\Base\Legacy\Yii\Helpers\FileHelper;
 use ZnCore\Base\Libs\App\Interfaces\LoaderInterface;
-use ZnCore\Base\Libs\Container\ContainerAttributeTrait;
+use ZnCore\Base\Libs\Container\Traits\ContainerAttributeTrait;
 use ZnCore\Base\Libs\FileSystem\Helpers\FilePathHelper;
 
 abstract class BaseLoader implements LoaderInterface

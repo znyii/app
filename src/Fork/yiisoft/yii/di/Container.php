@@ -4,7 +4,7 @@ namespace ZnYii\App\Fork\yiisoft\yii\di;
 
 use Psr\Container\ContainerInterface;
 use ZnCore\Base\Helpers\ClassHelper;
-use ZnCore\Base\Libs\App\Helpers\ContainerHelper;
+use ZnCore\Base\Libs\Container\Helpers\ContainerHelper;
 use ZnCore\Domain\Helpers\EntityHelper;
 
 class Container extends \yii\di\Container implements ContainerInterface
