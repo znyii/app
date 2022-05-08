@@ -7,6 +7,7 @@ use ZnCore\Base\Helpers\LoadHelper;
 use ZnCore\Base\Legacy\Yii\Helpers\FileHelper;
 use ZnCore\Base\Libs\App\Interfaces\LoaderInterface;
 use ZnCore\Base\Libs\Container\ContainerAttributeTrait;
+use ZnCore\Base\Libs\FileSystem\Helpers\FilePathHelper;
 
 abstract class BaseLoader implements LoaderInterface
 {
@@ -52,7 +53,7 @@ abstract class BaseLoader implements LoaderInterface
 
     private function prepareConfig(string $appName, array $config): array
     {
-        $config['vendorPath'] = $config['vendorPath'] ?? FileHelper::path('vendor');
+        $config['vendorPath'] = $config['vendorPath'] ?? FilePathHelper::path('vendor');
         $config['id'] = $config['id'] ?? $this->generateAppId($appName);
         $config['basePath'] = $config['basePath'] ?? $this->appDirectory;
         //$config['controllerNamespace'] = $config['controllerNamespace'] ?? $_ENV['PROJECT_DIR'] . '\controllers';
