@@ -2,6 +2,7 @@
 
 namespace ZnYii\App\Loader;
 
+use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
 use ZnCore\Base\Libs\App\Helpers\EnvHelper;
 use ZnCore\Base\Helpers\LoadHelper;
 use ZnCore\Base\Legacy\Yii\Helpers\FileHelper;
@@ -33,7 +34,7 @@ abstract class BaseLoader implements LoaderInterface
     public function loadMainConfig(string $appName): array
     {
         $configFiles = $this->mainConfigFiles($appName);
-        $config = LoadHelper::loadConfigList($configFiles);
+        $config = $this->loadConfigList($configFiles);
         if (empty($config['params'])) {
             $config['params'] = $this->loadParams($appName);
         }
@@ -49,6 +50,22 @@ abstract class BaseLoader implements LoaderInterface
     protected function isTestEnv(): bool
     {
         return EnvHelper::isTest();
+    }
+
+    protected function loadScript(string $fileName)
+    {
+        return @include(FilePathHelper::path($fileName));
+    }
+
+    protected function loadConfigList(array $fileNames, array $config = []): array
+    {
+        foreach ($fileNames as $fileName) {
+            $itemConfig = $this->loadScript($fileName);
+            if (is_array($itemConfig)) {
+                $config = ArrayHelper::merge($config, $itemConfig);
+            }
+        }
+        return $config;
     }
 
     private function prepareConfig(string $appName, array $config): array
@@ -71,7 +88,7 @@ abstract class BaseLoader implements LoaderInterface
         $configFiles = $this->paramConfigFiles($appName);
         $config = [];
         if ($configFiles) {
-            $config = LoadHelper::loadConfigList($configFiles);
+            $config = $this->loadConfigList($configFiles);
         }
         return $config;
     }
