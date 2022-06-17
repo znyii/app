@@ -26,7 +26,7 @@ class Kernel extends \ZnCore\Base\Libs\App\Kernel
             PrepareYiiSubscriber::class,
             //FilterYiiModulesByCompanySubscriber::class,
             ConfigureContainerSubscriber::class,
-            ConfigureEntityManagerSubscriber::class,
+//            ConfigureEntityManagerSubscriber::class,
         ];
     }
 }
