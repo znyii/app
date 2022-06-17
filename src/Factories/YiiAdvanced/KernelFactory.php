@@ -3,10 +3,11 @@
 namespace ZnYii\App\Factories\YiiAdvanced;
 
 use ZnCore\Base\Libs\App\Interfaces\LoaderInterface;
-use ZnCore\Base\Libs\App\Kernel;
 use ZnCore\Base\Libs\App\Loaders\BundleLoader;
 use ZnCore\Contract\Kernel\Interfaces\KernelInterface;
 use ZnYii\App\Loader\AdvancedLoader;
+
+\ZnCore\Base\Helpers\DeprecateHelper::hardThrow();
 
 class KernelFactory extends \ZnCore\Base\Libs\App\Factories\KernelFactory
 {

@@ -7,7 +7,7 @@ use ZnCore\Base\Libs\App\Kernel;
 class ApplicationFactory extends \ZnCore\Base\Libs\App\Factories\ApplicationFactory
 {
 
-    public static function createConsoleYii(Kernel $kernel): \yii\console\Application
+    /*public static function createConsoleYii(Kernel $kernel): \yii\console\Application
     {
         $config = $kernel->loadAppConfig();
         unset($config['consoleCommands']);
@@ -22,5 +22,5 @@ class ApplicationFactory extends \ZnCore\Base\Libs\App\Factories\ApplicationFact
         $application = new \yii\console\Application($config);
         restore_error_handler();
         return $application;
-    }
+    }*/
 }

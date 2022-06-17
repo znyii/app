@@ -9,6 +9,8 @@ use ZnCore\Base\Libs\App\Subscribers\ConfigureEntityManagerSubscriber;
 use ZnYii\App\Subscribers\FilterYiiModulesByCompanySubscriber;
 use ZnYii\App\Subscribers\PrepareYiiSubscriber;
 
+\ZnCore\Base\Helpers\DeprecateHelper::hardThrow();
+
 class Kernel extends \ZnCore\Base\Libs\App\Kernel
 {
 
